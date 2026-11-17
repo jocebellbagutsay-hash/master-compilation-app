@@ -8,8 +8,8 @@ A responsive, multi-screen React Native application built with **Expo SDK 58**, 
 
 | Member | Student ID | Academic Role | Key Contributions |
 | :--- | :--- | :--- | :--- |
-| **Alex Rivera** | `2023-10492` | Lead Frontend & State Architect | Global Context API architecture, theme engine, navigation system, responsive Flexbox layout |
-| **Jordan Cruz** | `2023-10884` | UI/UX & Component Specialist | Reusable atomic UI components, screen layouts, interactive playgrounds (useState & useEffect) |
+| **RM** | `2023-10492` | Lead Frontend & State Architect | Global Context API architecture, theme engine, navigation system, responsive Flexbox layout |
+| **Belle** | `2023-10884` | UI/UX & Component Specialist | Reusable atomic UI components, screen layouts, interactive playgrounds (useState & useEffect) |
 
 * **Program & Section:** Bachelor of Science in Information Technology (BSIT 3-A)
 * **Course:** Mobile Application Development

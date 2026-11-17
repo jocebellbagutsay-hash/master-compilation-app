@@ -10,10 +10,10 @@ export const AppProvider = ({ children }) => {
 
   // Global Student Pair Profile State
   const [profile, setProfile] = useState({
-    student1: 'Alex Rivera',
+    student1: 'RM',
     studentId1: '2023-10492',
     role1: 'Lead Frontend & State Architect',
-    student2: 'Jordan Cruz',
+    student2: 'Belle',
     studentId2: '2023-10884',
     role2: 'UI/UX & Component Specialist',
     course: 'BS in Information Technology',
