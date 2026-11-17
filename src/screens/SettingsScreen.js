@@ -8,7 +8,6 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,7 +15,7 @@ import { useApp } from '../context/AppContext';
 import { CustomCard, CustomButton } from '../components';
 import { SPACING, RADIUS } from '../constants/theme';
 
-export const SettingsScreen = ({ navigation }) => {
+export const SettingsScreen = () => {
   const {
     themeMode,
     isDark,
@@ -25,10 +24,9 @@ export const SettingsScreen = ({ navigation }) => {
     colors,
     profile,
     updateProfile,
-    stats,
   } = useApp();
 
-  // Local draft state for profile form
+  // Local draft state for profile form (demonstrating useState hook)
   const [student1, setStudent1] = useState(profile.student1);
   const [student2, setStudent2] = useState(profile.student2);
   const [studentId1, setStudentId1] = useState(profile.studentId1);
@@ -81,34 +79,19 @@ export const SettingsScreen = ({ navigation }) => {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={[styles.title, { color: colors.text }]}>Global Settings</Text>
+          <Text style={[styles.title, { color: colors.text }]}>Settings</Text>
           <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-            React Context API Live State Dispatcher
+            Global Theme & Student Profile Management
           </Text>
         </View>
-
-        {/* Global State Explanation Callout */}
-        <CustomCard style={styles.infoBanner} padding={SPACING.md}>
-          <View style={styles.infoRow}>
-            <Ionicons name="sparkles" size={20} color={colors.primary} />
-            <View style={styles.infoTextContainer}>
-              <Text style={[styles.infoTitle, { color: colors.text }]}>
-                Live Global Synchronization
-              </Text>
-              <Text style={[styles.infoBody, { color: colors.textSecondary }]}>
-                Changes made here immediately dispatch through `AppContext` and re-render the Home Dashboard, headers, navigation bars, and all screens without refreshing.
-              </Text>
-            </View>
-          </View>
-        </CustomCard>
 
         {/* Section 1: Dark / Light Theme Toggle */}
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Appearance & Theme
+            Appearance
           </Text>
           <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Toggle global color palette
+            Global theme mode
           </Text>
         </View>
 
@@ -124,10 +107,10 @@ export const SettingsScreen = ({ navigation }) => {
               </View>
               <View>
                 <Text style={[styles.settingLabel, { color: colors.text }]}>
-                  Dark Mode
+                  Dark Theme
                 </Text>
                 <Text style={[styles.settingSublabel, { color: colors.textSecondary }]}>
-                  Current theme: {themeMode.toUpperCase()}
+                  {themeMode.toUpperCase()} MODE ACTIVE
                 </Text>
               </View>
             </View>
@@ -193,10 +176,10 @@ export const SettingsScreen = ({ navigation }) => {
         {/* Section 2: Global Student Profile Management */}
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Student Pair Parameters
+            Student Profile
           </Text>
           <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Changing these values updates the Home Dashboard greeting & hero banner instantly
+            Global profile parameters synchronized across all screens
           </Text>
         </View>
 
@@ -205,14 +188,14 @@ export const SettingsScreen = ({ navigation }) => {
             <View style={[styles.feedbackBanner, { backgroundColor: `${colors.success}20`, borderColor: colors.success }]}>
               <Ionicons name="checkmark-circle" size={18} color={colors.success} />
               <Text style={[styles.feedbackText, { color: colors.success }]}>
-                Global state updated! Switch to the Home Tab to see changes live.
+                Profile updated! Dashboard reflects changes immediately.
               </Text>
             </View>
           )}
 
           {/* Student 1 */}
           <Text style={[styles.inputLabel, { color: colors.textSecondary }]}>
-            Student 1 Full Name
+            Student 1 Name
           </Text>
           <TextInput
             value={student1}
@@ -249,7 +232,7 @@ export const SettingsScreen = ({ navigation }) => {
 
           {/* Student 2 */}
           <Text style={[styles.inputLabel, { color: colors.textSecondary, marginTop: SPACING.sm }]}>
-            Student 2 Full Name
+            Student 2 Name
           </Text>
           <TextInput
             value={student2}
@@ -345,34 +328,6 @@ export const SettingsScreen = ({ navigation }) => {
             />
           </View>
         </CustomCard>
-
-        {/* Section 3: Live State Inspector */}
-        <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Live State Inspector
-          </Text>
-          <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Direct Context API memory snapshot
-          </Text>
-        </View>
-
-        <CustomCard style={styles.card} padding={SPACING.base}>
-          <View style={[styles.codeBlock, { backgroundColor: colors.cardAlt }]}>
-            <Text style={[styles.codeText, { color: colors.accent }]}>
-              {JSON.stringify(
-                {
-                  themeMode,
-                  activePair: `${profile.student1} & ${profile.student2}`,
-                  section: profile.section,
-                  course: profile.course,
-                  completedLabs: `${stats.completed}/${stats.total} (${stats.percent}%)`,
-                },
-                null,
-                2
-              )}
-            </Text>
-          </View>
-        </CustomCard>
       </ScrollView>
     </SafeAreaView>
   );
@@ -397,28 +352,6 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 13,
     marginTop: 2,
-  },
-  infoBanner: {
-    marginBottom: SPACING.lg,
-    borderLeftWidth: 4,
-    borderLeftColor: '#6366F1',
-  },
-  infoRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 12,
-  },
-  infoTextContainer: {
-    flex: 1,
-  },
-  infoTitle: {
-    fontSize: 14,
-    fontWeight: '700',
-    marginBottom: 2,
-  },
-  infoBody: {
-    fontSize: 12,
-    lineHeight: 17,
   },
   sectionHeader: {
     marginBottom: SPACING.sm,
@@ -459,7 +392,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   settingSublabel: {
-    fontSize: 12,
+    fontSize: 11,
+    letterSpacing: 0.5,
+    marginTop: 2,
   },
   themeSelectorRow: {
     flexDirection: 'row',
@@ -471,7 +406,7 @@ const styles = StyleSheet.create({
     borderRadius: RADIUS.md,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 90,
+    minHeight: 88,
   },
   themeChoiceText: {
     fontSize: 13,
@@ -526,14 +461,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     marginTop: SPACING.base,
-  },
-  codeBlock: {
-    padding: SPACING.md,
-    borderRadius: RADIUS.md,
-  },
-  codeText: {
-    fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
-    fontSize: 12,
-    lineHeight: 18,
   },
 });

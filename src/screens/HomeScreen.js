@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,22 +12,16 @@ import { useApp } from '../context/AppContext';
 import {
   HeaderBar,
   CustomCard,
-  CustomButton,
-  StatBox,
   LabCard,
-  StatusBadge,
 } from '../components';
 import { SPACING, RADIUS } from '../constants/theme';
 
 export const HomeScreen = ({ navigation }) => {
-  const { colors, isDark, profile, labs, stats } = useApp();
-
-  const featuredLabs = labs.slice(0, 3);
-  const finalProject = labs.find((l) => l.id === 'final-proj') || labs[labs.length - 1];
+  const { colors, profile, labs } = useApp();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'left', 'right']}>
-      {/* Top Header with live greeting and theme switcher */}
+      {/* Top Header with live greeting and theme quick-toggle */}
       <HeaderBar
         onProfilePress={() => navigation.navigate('ProfileTab')}
       />
@@ -37,108 +30,49 @@ export const HomeScreen = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {/* Pair Hero Banner */}
+        {/* Welcome / Pair Profile Card */}
         <CustomCard style={styles.heroCard} padding={SPACING.lg}>
           <View style={styles.heroTopRow}>
             <View style={[styles.pairTag, { backgroundColor: `${colors.primary}20` }]}>
-              <Ionicons name="people" size={14} color={colors.primary} />
+              <Ionicons name="school" size={14} color={colors.primary} />
               <Text style={[styles.pairTagText, { color: colors.primary }]}>
-                PAIR COLLABORATION
+                {profile.course}
               </Text>
             </View>
-            <View style={styles.termBadge}>
-              <Text style={[styles.termBadgeText, { color: colors.textSecondary }]}>
-                {profile.academicYear}
-              </Text>
-            </View>
+            <Text style={[styles.sectionBadge, { color: colors.textSecondary }]}>
+              {profile.section}
+            </Text>
           </View>
 
           <Text style={[styles.heroHeading, { color: colors.text }]}>
-            Master Compilation Hub
+            Master Compilation App
           </Text>
 
           <Text style={[styles.heroSubtext, { color: colors.textSecondary }]}>
-            Final requirement and centralized compilation for all laboratory activities by{' '}
+            Final requirement and master compilation hub for all laboratory activities developed by{' '}
             <Text style={{ fontWeight: '700', color: colors.text }}>
               {profile.student1}
             </Text>{' '}
-            &{' '}
+            and{' '}
             <Text style={{ fontWeight: '700', color: colors.text }}>
               {profile.student2}
             </Text>
             .
           </Text>
-
-          {/* Progress bar container */}
-          <View style={styles.progressContainer}>
-            <View style={styles.progressHeader}>
-              <Text style={[styles.progressLabel, { color: colors.textSecondary }]}>
-                Curriculum Milestone Completion
-              </Text>
-              <Text style={[styles.progressPercent, { color: colors.primary }]}>
-                {stats.percent}%
-              </Text>
-            </View>
-            <View style={[styles.progressBarTrack, { backgroundColor: colors.surface }]}>
-              <View
-                style={[
-                  styles.progressBarFill,
-                  {
-                    width: `${stats.percent}%`,
-                    backgroundColor: colors.primary,
-                  },
-                ]}
-              />
-            </View>
-          </View>
         </CustomCard>
 
-        {/* Responsive Stats Grid (Flexbox) */}
+        {/* Dashboard Menu Section */}
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Activity Metrics
+            Dashboard Menu
           </Text>
           <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Real-time synchronization
-          </Text>
-        </View>
-
-        <View style={styles.statsRow}>
-          <StatBox
-            icon="albums-outline"
-            value={stats.total}
-            label="Total Labs"
-            accentColor={colors.primary}
-            onPress={() => navigation.navigate('LabsTab')}
-          />
-          <StatBox
-            icon="checkmark-done-circle-outline"
-            value={stats.completed}
-            label="Completed"
-            accentColor={colors.success}
-            onPress={() => navigation.navigate('LabsTab')}
-          />
-          <StatBox
-            icon="hourglass-outline"
-            value={stats.inProgress}
-            label="In Progress"
-            accentColor={colors.warning}
-            onPress={() => navigation.navigate('LabsTab')}
-          />
-        </View>
-
-        {/* Quick Menu Hub */}
-        <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Navigation Hub
-          </Text>
-          <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Quick access menus
+            Quick navigation to application modules
           </Text>
         </View>
 
         <View style={styles.menuGrid}>
-          {/* Card 1: View Labs */}
+          {/* Menu Item 1: All Activities */}
           <CustomCard
             style={styles.menuCard}
             onPress={() => navigation.navigate('LabsTab')}
@@ -147,66 +81,66 @@ export const HomeScreen = ({ navigation }) => {
             <View style={[styles.menuIconBox, { backgroundColor: `${colors.primary}18` }]}>
               <Ionicons name="folder-open" size={24} color={colors.primary} />
             </View>
-            <Text style={[styles.menuTitle, { color: colors.text }]}>All Activities</Text>
+            <Text style={[styles.menuTitle, { color: colors.text }]}>Activities</Text>
             <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Explore complete lab syllabus & code demos
+              Browse compilation directory
             </Text>
           </CustomCard>
 
-          {/* Card 2: Settings & Global State */}
+          {/* Menu Item 2: Activity 1 Details */}
+          <CustomCard
+            style={styles.menuCard}
+            onPress={() => navigation.navigate('LabDetail', { labId: 'act-1' })}
+            padding={SPACING.md}
+          >
+            <View style={[styles.menuIconBox, { backgroundColor: `${colors.accent}18` }]}>
+              <Ionicons name="document-text" size={24} color={colors.accent} />
+            </View>
+            <Text style={[styles.menuTitle, { color: colors.text }]}>Activity 1</Text>
+            <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
+              View submission & objectives
+            </Text>
+          </CustomCard>
+
+          {/* Menu Item 3: Settings */}
           <CustomCard
             style={styles.menuCard}
             onPress={() => navigation.navigate('SettingsTab')}
             padding={SPACING.md}
           >
-            <View style={[styles.menuIconBox, { backgroundColor: `${colors.accent}18` }]}>
-              <Ionicons name="options" size={24} color={colors.accent} />
+            <View style={[styles.menuIconBox, { backgroundColor: `${colors.warning}18` }]}>
+              <Ionicons name="options" size={24} color={colors.warning} />
             </View>
-            <Text style={[styles.menuTitle, { color: colors.text }]}>Settings & Theme</Text>
+            <Text style={[styles.menuTitle, { color: colors.text }]}>Settings</Text>
             <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Test live global state & edit pair info
+              Theme & student profile
             </Text>
           </CustomCard>
 
-          {/* Card 3: Pair Info */}
+          {/* Menu Item 4: Pair Profile */}
           <CustomCard
             style={styles.menuCard}
             onPress={() => navigation.navigate('ProfileTab')}
             padding={SPACING.md}
           >
             <View style={[styles.menuIconBox, { backgroundColor: `${colors.success}18` }]}>
-              <Ionicons name="person-circle" size={24} color={colors.success} />
+              <Ionicons name="people" size={24} color={colors.success} />
             </View>
-            <Text style={[styles.menuTitle, { color: colors.text }]}>Pair Details</Text>
+            <Text style={[styles.menuTitle, { color: colors.text }]}>Pair Profile</Text>
             <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Student IDs, roles & contributions
-            </Text>
-          </CustomCard>
-
-          {/* Card 4: Activity 1 Details */}
-          <CustomCard
-            style={styles.menuCard}
-            onPress={() => navigation.navigate('LabDetail', { labId: 'act-1' })}
-            padding={SPACING.md}
-          >
-            <View style={[styles.menuIconBox, { backgroundColor: `${colors.warning}18` }]}>
-              <Ionicons name="code-slash" size={24} color={colors.warning} />
-            </View>
-            <Text style={[styles.menuTitle, { color: colors.text }]}>Activity 1 Details</Text>
-            <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Master compilation objectives & sandbox
+              Credentials & contributions
             </Text>
           </CustomCard>
         </View>
 
-        {/* Current Laboratory Activity Section */}
+        {/* Current Activity Card */}
         <View style={styles.sectionHeaderRow}>
           <View>
             <Text style={[styles.sectionTitle, { color: colors.text }]}>
-              Current Laboratory Activity
+              Laboratory Activities
             </Text>
             <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-              Activity 1 — Master Compilation App
+              Current active compilation milestone
             </Text>
           </View>
           <TouchableOpacity
@@ -214,9 +148,9 @@ export const HomeScreen = ({ navigation }) => {
             style={styles.seeAllButton}
           >
             <Text style={[styles.seeAllText, { color: colors.primary }]}>
-              View All ({labs.length})
+              View All
             </Text>
-            <Ionicons name="arrow-forward" size={14} color={colors.primary} />
+            <Ionicons name="chevron-forward" size={14} color={colors.primary} />
           </TouchableOpacity>
         </View>
 
@@ -227,67 +161,6 @@ export const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate('LabDetail', { labId: lab.id })}
           />
         ))}
-
-        {/* Future Activities Placeholder Callout */}
-        <CustomCard
-          style={{
-            marginTop: SPACING.xs,
-            marginBottom: SPACING.md,
-            borderStyle: 'dashed',
-            borderWidth: 1.5,
-            borderColor: colors.border,
-            backgroundColor: colors.cardAlt,
-          }}
-          padding={SPACING.base}
-        >
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-            <View
-              style={{
-                width: 42,
-                height: 42,
-                borderRadius: RADIUS.md,
-                backgroundColor: `${colors.primary}15`,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Ionicons name="time-outline" size={22} color={colors.primary} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 14, fontWeight: '700', color: colors.text, marginBottom: 2 }}>
-                Future Laboratory Activities
-              </Text>
-              <Text style={{ fontSize: 12, lineHeight: 17, color: colors.textSecondary }}>
-                Future laboratory activities will be added here once assigned by the instructor.
-              </Text>
-            </View>
-          </View>
-        </CustomCard>
-
-        {/* Bottom CTA for Settings Demo */}
-        <CustomCard style={styles.settingsCallout} padding={SPACING.base}>
-          <View style={styles.calloutRow}>
-            <View style={[styles.calloutIcon, { backgroundColor: `${colors.primary}20` }]}>
-              <Ionicons name="color-wand" size={22} color={colors.primary} />
-            </View>
-            <View style={styles.calloutTextContainer}>
-              <Text style={[styles.calloutTitle, { color: colors.text }]}>
-                Global State Management
-              </Text>
-              <Text style={[styles.calloutBody, { color: colors.textSecondary }]}>
-                Toggle between Light and Dark themes or edit pair student names in Settings to watch every screen update instantly.
-              </Text>
-            </View>
-          </View>
-          <CustomButton
-            title="Open Global Settings"
-            icon="settings-outline"
-            variant="outline"
-            size="sm"
-            style={{ marginTop: SPACING.md }}
-            onPress={() => navigation.navigate('SettingsTab')}
-          />
-        </CustomCard>
       </ScrollView>
     </SafeAreaView>
   );
@@ -319,17 +192,13 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   pairTagText: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '700',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
-  termBadge: {
-    paddingVertical: 2,
-    paddingHorizontal: 6,
-  },
-  termBadgeText: {
+  sectionBadge: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: '600',
   },
   heroHeading: {
     fontSize: 22,
@@ -340,33 +209,6 @@ const styles = StyleSheet.create({
   heroSubtext: {
     fontSize: 14,
     lineHeight: 20,
-    marginBottom: SPACING.base,
-  },
-  progressContainer: {
-    marginTop: 4,
-  },
-  progressHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 6,
-  },
-  progressLabel: {
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  progressPercent: {
-    fontSize: 13,
-    fontWeight: '700',
-  },
-  progressBarTrack: {
-    height: 8,
-    borderRadius: RADIUS.full,
-    overflow: 'hidden',
-  },
-  progressBarFill: {
-    height: '100%',
-    borderRadius: RADIUS.full,
   },
   sectionHeader: {
     marginBottom: SPACING.sm,
@@ -390,17 +232,12 @@ const styles = StyleSheet.create({
   seeAllButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
+    gap: 2,
     paddingBottom: 2,
   },
   seeAllText: {
     fontSize: 13,
     fontWeight: '600',
-  },
-  statsRow: {
-    flexDirection: 'row',
-    gap: SPACING.sm,
-    marginBottom: SPACING.lg,
   },
   menuGrid: {
     flexDirection: 'row',
@@ -411,7 +248,7 @@ const styles = StyleSheet.create({
   menuCard: {
     flexBasis: '48%',
     flexGrow: 1,
-    minHeight: 120,
+    minHeight: 115,
     justifyContent: 'center',
   },
   menuIconBox: {
@@ -430,33 +267,5 @@ const styles = StyleSheet.create({
   menuDesc: {
     fontSize: 11,
     lineHeight: 15,
-  },
-  settingsCallout: {
-    marginTop: SPACING.base,
-    borderStyle: 'dashed',
-  },
-  calloutRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 12,
-  },
-  calloutIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: RADIUS.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  calloutTextContainer: {
-    flex: 1,
-  },
-  calloutTitle: {
-    fontSize: 14,
-    fontWeight: '700',
-    marginBottom: 4,
-  },
-  calloutBody: {
-    fontSize: 12,
-    lineHeight: 17,
   },
 });

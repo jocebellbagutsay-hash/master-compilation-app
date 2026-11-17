@@ -10,12 +10,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../context/AppContext';
 import { SearchBar, LabCard, CustomCard } from '../components';
-import { SPACING, RADIUS } from '../constants/theme';
+import { SPACING } from '../constants/theme';
 
 export const LabsScreen = ({ navigation }) => {
   const { colors, labs } = useApp();
 
-  // Local state for interactive search & category filter (useState)
+  // Local state for interactive search & category filter (useState hook)
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -45,52 +45,16 @@ export const LabsScreen = ({ navigation }) => {
     </CustomCard>
   );
 
-  const renderFooter = () => (
-    <CustomCard
-      style={{
-        marginTop: SPACING.md,
-        borderStyle: 'dashed',
-        borderWidth: 1.5,
-        borderColor: colors.border,
-        backgroundColor: colors.cardAlt,
-      }}
-      padding={SPACING.base}
-    >
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-        <View
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: RADIUS.md,
-            backgroundColor: `${colors.primary}15`,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Ionicons name="folder-outline" size={22} color={colors.primary} />
-        </View>
-        <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 14, fontWeight: '700', color: colors.text, marginBottom: 2 }}>
-            Future Laboratory Activities
-          </Text>
-          <Text style={{ fontSize: 12, lineHeight: 17, color: colors.textSecondary }}>
-            Future laboratory activities will appear here once assigned by the instructor.
-          </Text>
-        </View>
-      </View>
-    </CustomCard>
-  );
-
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'left', 'right']}>
-      {/* Static Header & SearchBar to retain TextInput focus across re-renders */}
+      {/* SearchBar placed permanently in header to retain focus across re-renders */}
       <View style={styles.headerArea}>
         <View style={styles.titleSection}>
           <Text style={[styles.mainHeading, { color: colors.text }]}>
-            Laboratory Directory
+            Activities Directory
           </Text>
           <Text style={[styles.mainSubheading, { color: colors.textSecondary }]}>
-            Master compilation for future laboratory submissions
+            Master compilation for laboratory activities
           </Text>
         </View>
 
@@ -104,7 +68,7 @@ export const LabsScreen = ({ navigation }) => {
 
         <View style={styles.resultsInfoRow}>
           <Text style={[styles.resultsCount, { color: colors.textSecondary }]}>
-            Showing {filteredLabs.length} of {labs.length} activities
+            Showing {filteredLabs.length} of {labs.length} activity
           </Text>
           {searchQuery !== '' && (
             <TouchableOpacity onPress={() => setSearchQuery('')}>
@@ -119,7 +83,6 @@ export const LabsScreen = ({ navigation }) => {
       <FlatList
         data={filteredLabs}
         keyExtractor={(item) => item.id}
-        ListFooterComponent={renderFooter}
         ListEmptyComponent={renderEmptyList}
         renderItem={({ item }) => (
           <LabCard
