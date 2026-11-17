@@ -49,15 +49,7 @@ export const HomeScreen = ({ navigation }) => {
           </Text>
 
           <Text style={[styles.heroSubtext, { color: colors.textSecondary }]}>
-            Final requirement and master compilation hub for all laboratory activities developed by{' '}
-            <Text style={{ fontWeight: '700', color: colors.text }}>
-              {profile.student1}
-            </Text>{' '}
-            and{' '}
-            <Text style={{ fontWeight: '700', color: colors.text }}>
-              {profile.student2}
-            </Text>
-            .
+            {profile.student1} & {profile.student2}
           </Text>
         </CustomCard>
 
@@ -65,9 +57,6 @@ export const HomeScreen = ({ navigation }) => {
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Dashboard Menu
-          </Text>
-          <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Quick navigation to application modules
           </Text>
         </View>
 
@@ -82,9 +71,6 @@ export const HomeScreen = ({ navigation }) => {
               <Ionicons name="folder-open" size={24} color={colors.primary} />
             </View>
             <Text style={[styles.menuTitle, { color: colors.text }]}>Activities</Text>
-            <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Browse compilation directory
-            </Text>
           </CustomCard>
 
           {/* Menu Item 2: Activity 1 Details */}
@@ -97,9 +83,6 @@ export const HomeScreen = ({ navigation }) => {
               <Ionicons name="document-text" size={24} color={colors.accent} />
             </View>
             <Text style={[styles.menuTitle, { color: colors.text }]}>Activity 1</Text>
-            <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              View submission & objectives
-            </Text>
           </CustomCard>
 
           {/* Menu Item 3: Settings */}
@@ -112,9 +95,6 @@ export const HomeScreen = ({ navigation }) => {
               <Ionicons name="options" size={24} color={colors.warning} />
             </View>
             <Text style={[styles.menuTitle, { color: colors.text }]}>Settings</Text>
-            <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Theme & student profile
-            </Text>
           </CustomCard>
 
           {/* Menu Item 4: Pair Profile */}
@@ -127,22 +107,14 @@ export const HomeScreen = ({ navigation }) => {
               <Ionicons name="people" size={24} color={colors.success} />
             </View>
             <Text style={[styles.menuTitle, { color: colors.text }]}>Pair Profile</Text>
-            <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Credentials & contributions
-            </Text>
           </CustomCard>
         </View>
 
         {/* Current Activity Card */}
         <View style={styles.sectionHeaderRow}>
-          <View>
-            <Text style={[styles.sectionTitle, { color: colors.text }]}>
-              Laboratory Activities
-            </Text>
-            <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-              Current active compilation milestone
-            </Text>
-          </View>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>
+            Laboratory Activities
+          </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate('LabsTab')}
             style={styles.seeAllButton}
@@ -204,11 +176,11 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '800',
     letterSpacing: -0.5,
-    marginBottom: 6,
+    marginBottom: 4,
   },
   heroSubtext: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 15,
+    fontWeight: '600',
   },
   sectionHeader: {
     marginBottom: SPACING.sm,
@@ -216,7 +188,7 @@ const styles = StyleSheet.create({
   sectionHeaderRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     marginBottom: SPACING.sm,
     marginTop: SPACING.sm,
   },
@@ -225,15 +197,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: -0.3,
   },
-  sectionSubtitle: {
-    fontSize: 12,
-    marginTop: 2,
-  },
   seeAllButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 2,
-    paddingBottom: 2,
   },
   seeAllText: {
     fontSize: 13,
@@ -248,7 +215,7 @@ const styles = StyleSheet.create({
   menuCard: {
     flexBasis: '48%',
     flexGrow: 1,
-    minHeight: 115,
+    minHeight: 96,
     justifyContent: 'center',
   },
   menuIconBox: {
@@ -257,15 +224,10 @@ const styles = StyleSheet.create({
     borderRadius: RADIUS.md,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: SPACING.sm,
+    marginBottom: SPACING.xs,
   },
   menuTitle: {
     fontSize: 14,
     fontWeight: '700',
-    marginBottom: 4,
-  },
-  menuDesc: {
-    fontSize: 11,
-    lineHeight: 15,
   },
 });

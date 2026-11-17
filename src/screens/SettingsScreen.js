@@ -80,18 +80,12 @@ export const SettingsScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <Text style={[styles.title, { color: colors.text }]}>Settings</Text>
-          <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-            Global Theme & Student Profile Management
-          </Text>
         </View>
 
         {/* Section 1: Dark / Light Theme Toggle */}
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Appearance
-          </Text>
-          <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Global theme mode
           </Text>
         </View>
 
@@ -177,9 +171,6 @@ export const SettingsScreen = () => {
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Student Profile
-          </Text>
-          <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Global profile parameters synchronized across all screens
           </Text>
         </View>
 

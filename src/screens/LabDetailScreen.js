@@ -80,9 +80,6 @@ export const LabDetailScreen = ({ route, navigation }) => {
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Laboratory Objectives
           </Text>
-          <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-            Key requirements achieved
-          </Text>
         </View>
 
         <CustomCard style={styles.objectivesCard} padding={SPACING.base}>

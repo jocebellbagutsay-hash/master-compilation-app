@@ -25,9 +25,6 @@ export const ProfileScreen = ({ navigation }) => {
         {/* Header */}
         <View style={styles.header}>
           <Text style={[styles.title, { color: colors.text }]}>Pair Profile</Text>
-          <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-            Academic credentials & collaboration roles
-          </Text>
         </View>
 
         {/* Academic Course Card */}
@@ -74,9 +71,6 @@ export const ProfileScreen = ({ navigation }) => {
           <View style={[styles.divider, { backgroundColor: colors.borderLight }]} />
 
           <View style={styles.roleSection}>
-            <Text style={[styles.roleLabel, { color: colors.textSecondary }]}>
-              Primary Responsibilities:
-            </Text>
             <Text style={[styles.roleDesc, { color: colors.text }]}>
               {profile.role1}
             </Text>
@@ -107,9 +101,6 @@ export const ProfileScreen = ({ navigation }) => {
           <View style={[styles.divider, { backgroundColor: colors.borderLight }]} />
 
           <View style={styles.roleSection}>
-            <Text style={[styles.roleLabel, { color: colors.textSecondary }]}>
-              Primary Responsibilities:
-            </Text>
             <Text style={[styles.roleDesc, { color: colors.text }]}>
               {profile.role2}
             </Text>

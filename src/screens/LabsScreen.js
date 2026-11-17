@@ -53,9 +53,6 @@ export const LabsScreen = ({ navigation }) => {
           <Text style={[styles.mainHeading, { color: colors.text }]}>
             Activities Directory
           </Text>
-          <Text style={[styles.mainSubheading, { color: colors.textSecondary }]}>
-            Master compilation for laboratory activities
-          </Text>
         </View>
 
         <SearchBar
