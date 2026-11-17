@@ -108,7 +108,7 @@ export const LabsScreen = ({ navigation }) => {
             Future Laboratory Activities
           </Text>
           <Text style={{ fontSize: 12, lineHeight: 17, color: colors.textSecondary }}>
-            Activity 2, Activity 3, etc. will appear here once assigned in subsequent laboratory meetings.
+            Future laboratory activities will appear here once assigned by the instructor.
           </Text>
         </View>
       </View>

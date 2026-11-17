@@ -258,7 +258,7 @@ export const HomeScreen = ({ navigation }) => {
                 Future Laboratory Activities
               </Text>
               <Text style={{ fontSize: 12, lineHeight: 17, color: colors.textSecondary }}>
-                Activity 2, Activity 3, etc. will be compiled here once assigned in upcoming laboratory sessions.
+                Future laboratory activities will be added here once assigned by the instructor.
               </Text>
             </View>
           </View>
