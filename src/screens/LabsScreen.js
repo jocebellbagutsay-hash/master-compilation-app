@@ -13,7 +13,7 @@ import { SearchBar, LabCard, CustomCard } from '../components';
 import { SPACING, RADIUS } from '../constants/theme';
 
 export const LabsScreen = ({ navigation }) => {
-  const { colors, labs, stats } = useApp();
+  const { colors, labs } = useApp();
 
   // Local state for interactive search & category filter (useState)
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,46 +35,12 @@ export const LabsScreen = ({ navigation }) => {
     });
   }, [labs, searchQuery, selectedCategory]);
 
-  const renderHeader = () => (
-    <View style={styles.headerArea}>
-      <View style={styles.titleSection}>
-        <Text style={[styles.mainHeading, { color: colors.text }]}>
-          Laboratory Directory
-        </Text>
-        <Text style={[styles.mainSubheading, { color: colors.textSecondary }]}>
-          Master compilation for future laboratory submissions
-        </Text>
-      </View>
-
-      <SearchBar
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-        categories={['All', 'Activity 1']}
-      />
-
-      <View style={styles.resultsInfoRow}>
-        <Text style={[styles.resultsCount, { color: colors.textSecondary }]}>
-          Showing {filteredLabs.length} of {labs.length} activities
-        </Text>
-        {searchQuery !== '' && (
-          <TouchableOpacity onPress={() => setSearchQuery('')}>
-            <Text style={[styles.clearSearchLink, { color: colors.primary }]}>
-              Clear Filter
-            </Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    </View>
-  );
-
   const renderEmptyList = () => (
     <CustomCard style={styles.emptyContainer} padding={SPACING.xl}>
       <Ionicons name="search-outline" size={48} color={colors.textMuted} />
       <Text style={[styles.emptyTitle, { color: colors.text }]}>No activities found</Text>
       <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
-        No activities match your search "{searchQuery}" or category filter. Try searching for a different keyword like "Props", "Hooks", or "Navigation".
+        No activities match your search "{searchQuery}".
       </Text>
     </CustomCard>
   );
@@ -117,10 +83,42 @@ export const LabsScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'left', 'right']}>
+      {/* Static Header & SearchBar to retain TextInput focus across re-renders */}
+      <View style={styles.headerArea}>
+        <View style={styles.titleSection}>
+          <Text style={[styles.mainHeading, { color: colors.text }]}>
+            Laboratory Directory
+          </Text>
+          <Text style={[styles.mainSubheading, { color: colors.textSecondary }]}>
+            Master compilation for future laboratory submissions
+          </Text>
+        </View>
+
+        <SearchBar
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+          categories={['All', 'Activity 1']}
+        />
+
+        <View style={styles.resultsInfoRow}>
+          <Text style={[styles.resultsCount, { color: colors.textSecondary }]}>
+            Showing {filteredLabs.length} of {labs.length} activities
+          </Text>
+          {searchQuery !== '' && (
+            <TouchableOpacity onPress={() => setSearchQuery('')}>
+              <Text style={[styles.clearSearchLink, { color: colors.primary }]}>
+                Clear Filter
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+
       <FlatList
         data={filteredLabs}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={renderHeader}
         ListFooterComponent={renderFooter}
         ListEmptyComponent={renderEmptyList}
         renderItem={({ item }) => (
@@ -131,6 +129,7 @@ export const LabsScreen = ({ navigation }) => {
         )}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       />
     </SafeAreaView>
   );
@@ -140,12 +139,15 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
-  listContent: {
-    padding: SPACING.base,
-    paddingBottom: SPACING.xxl,
-  },
   headerArea: {
-    marginBottom: SPACING.sm,
+    paddingHorizontal: SPACING.base,
+    paddingTop: SPACING.base,
+    paddingBottom: SPACING.xs,
+  },
+  listContent: {
+    paddingHorizontal: SPACING.base,
+    paddingTop: SPACING.xs,
+    paddingBottom: SPACING.xxl,
   },
   titleSection: {
     marginBottom: SPACING.base,
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: SPACING.sm,
+    marginBottom: SPACING.xs,
     paddingHorizontal: 2,
   },
   resultsCount: {

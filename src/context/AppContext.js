@@ -11,17 +11,14 @@ export const AppProvider = ({ children }) => {
   // Global Student Pair Profile State
   const [profile, setProfile] = useState({
     student1: 'RM',
-    studentId1: '2023-10492',
-    role1: 'Lead Frontend & State Architect',
+    studentId1: '1005742',
     student2: 'Belle',
-    studentId2: '2023-10884',
-    role2: 'UI/UX & Component Specialist',
-    course: 'BS in Information Technology',
-    section: 'BSIT 3-A',
-    subject: 'Mobile Application Development',
+    studentId2: '1006592',
+    course: 'BS in Computer Science',
+    section: 'BSCS 4B',
+    subject: 'Mobile Computing 2',
     academicYear: 'AY 2026-2027',
     term: '1st Semester',
-    repositoryUrl: 'https://github.com/pair-students/react-native-master-compilation',
   });
 
   // Global Labs Data State
