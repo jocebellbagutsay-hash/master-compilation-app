@@ -183,30 +183,30 @@ export const HomeScreen = ({ navigation }) => {
             </Text>
           </CustomCard>
 
-          {/* Card 4: Final Showcase */}
+          {/* Card 4: Activity 1 Details */}
           <CustomCard
             style={styles.menuCard}
-            onPress={() => navigation.navigate('LabDetail', { labId: finalProject.id })}
+            onPress={() => navigation.navigate('LabDetail', { labId: 'act-1' })}
             padding={SPACING.md}
           >
             <View style={[styles.menuIconBox, { backgroundColor: `${colors.warning}18` }]}>
-              <Ionicons name="trophy" size={24} color={colors.warning} />
+              <Ionicons name="code-slash" size={24} color={colors.warning} />
             </View>
-            <Text style={[styles.menuTitle, { color: colors.text }]}>Final Showcase</Text>
+            <Text style={[styles.menuTitle, { color: colors.text }]}>Activity 1 Details</Text>
             <Text style={[styles.menuDesc, { color: colors.textSecondary }]}>
-              Capstone requirements & architecture
+              Master compilation objectives & sandbox
             </Text>
           </CustomCard>
         </View>
 
-        {/* Featured / Recent Laboratory Activities */}
+        {/* Current Laboratory Activity Section */}
         <View style={styles.sectionHeaderRow}>
           <View>
             <Text style={[styles.sectionTitle, { color: colors.text }]}>
-              Laboratory Activities (Placeholder Slots)
+              Current Laboratory Activity
             </Text>
             <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-              Empty compilation slots ready for future submissions
+              Activity 1 — Master Compilation App
             </Text>
           </View>
           <TouchableOpacity
@@ -220,13 +220,49 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {featuredLabs.map((lab) => (
+        {labs.map((lab) => (
           <LabCard
             key={lab.id}
             lab={lab}
             onPress={() => navigation.navigate('LabDetail', { labId: lab.id })}
           />
         ))}
+
+        {/* Future Activities Placeholder Callout */}
+        <CustomCard
+          style={{
+            marginTop: SPACING.xs,
+            marginBottom: SPACING.md,
+            borderStyle: 'dashed',
+            borderWidth: 1.5,
+            borderColor: colors.border,
+            backgroundColor: colors.cardAlt,
+          }}
+          padding={SPACING.base}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <View
+              style={{
+                width: 42,
+                height: 42,
+                borderRadius: RADIUS.md,
+                backgroundColor: `${colors.primary}15`,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Ionicons name="time-outline" size={22} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={{ fontSize: 14, fontWeight: '700', color: colors.text, marginBottom: 2 }}>
+                Future Laboratory Activities
+              </Text>
+              <Text style={{ fontSize: 12, lineHeight: 17, color: colors.textSecondary }}>
+                Activity 2, Activity 3, etc. will be compiled here once assigned in upcoming laboratory sessions.
+              </Text>
+            </View>
+          </View>
+        </CustomCard>
 
         {/* Bottom CTA for Settings Demo */}
         <CustomCard style={styles.settingsCallout} padding={SPACING.base}>

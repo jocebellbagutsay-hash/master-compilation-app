@@ -51,6 +51,7 @@ export const LabsScreen = ({ navigation }) => {
         onSearchChange={setSearchQuery}
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
+        categories={['All', 'Activity 1']}
       />
 
       <View style={styles.resultsInfoRow}>
@@ -78,12 +79,49 @@ export const LabsScreen = ({ navigation }) => {
     </CustomCard>
   );
 
+  const renderFooter = () => (
+    <CustomCard
+      style={{
+        marginTop: SPACING.md,
+        borderStyle: 'dashed',
+        borderWidth: 1.5,
+        borderColor: colors.border,
+        backgroundColor: colors.cardAlt,
+      }}
+      padding={SPACING.base}
+    >
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <View
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: RADIUS.md,
+            backgroundColor: `${colors.primary}15`,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Ionicons name="folder-outline" size={22} color={colors.primary} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={{ fontSize: 14, fontWeight: '700', color: colors.text, marginBottom: 2 }}>
+            Future Laboratory Activities
+          </Text>
+          <Text style={{ fontSize: 12, lineHeight: 17, color: colors.textSecondary }}>
+            Activity 2, Activity 3, etc. will appear here once assigned in subsequent laboratory meetings.
+          </Text>
+        </View>
+      </View>
+    </CustomCard>
+  );
+
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]} edges={['top', 'left', 'right']}>
       <FlatList
         data={filteredLabs}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={renderHeader}
+        ListFooterComponent={renderFooter}
         ListEmptyComponent={renderEmptyList}
         renderItem={({ item }) => (
           <LabCard
