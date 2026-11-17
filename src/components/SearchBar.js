@@ -9,7 +9,7 @@ export const SearchBar = ({
   onSearchChange,
   selectedCategory,
   onSelectCategory,
-  categories = ['All', 'Fundamentals', 'Architecture', 'State & Lifecycle', 'UI/UX', 'Navigation', 'Final Project'],
+  categories = ['All', 'Slot 1', 'Slot 2', 'Slot 3', 'Slot 4', 'Slot 5', 'Final UI'],
 }) => {
   const { colors } = useApp();
 

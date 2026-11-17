@@ -311,7 +311,7 @@ export const LabDetailScreen = ({ route, navigation }) => {
 
           {/* Toggle status action button */}
           <CustomButton
-            title={isCompleted ? 'Mark as In Progress' : 'Mark as Completed'}
+            title={isCompleted ? 'Mark Slot as Pending' : 'Mark Slot as Completed'}
             icon={isCompleted ? 'time-outline' : 'checkmark-circle-outline'}
             variant={isCompleted ? 'outline' : 'primary'}
             size="md"
@@ -319,6 +319,31 @@ export const LabDetailScreen = ({ route, navigation }) => {
             onPress={handleToggleStatus}
           />
         </CustomCard>
+
+        {/* Future placeholder banner */}
+        {lab.isPlaceholder && (
+          <CustomCard
+            style={{
+              marginBottom: SPACING.lg,
+              borderLeftWidth: 4,
+              borderLeftColor: colors.primary,
+              backgroundColor: `${colors.primary}0D`,
+            }}
+            padding={SPACING.base}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 10 }}>
+              <Ionicons name="bookmark-outline" size={22} color={colors.primary} />
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontSize: 14, fontWeight: '700', color: colors.text, marginBottom: 2 }}>
+                  Empty Activity Slot ({lab.labNumber})
+                </Text>
+                <Text style={{ fontSize: 12, lineHeight: 18, color: colors.textSecondary }}>
+                  Kining maong screen kay gi-andam isip placeholder slot. Dili pa kinahanglan butangan og actual output karon. Sa umaabot nga laboratory activities na kini butangan og code.
+                </Text>
+              </View>
+            </View>
+          </CustomCard>
+        )}
 
         {/* Objectives Section */}
         <View style={styles.sectionHeader}>

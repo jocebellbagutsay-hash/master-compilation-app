@@ -203,10 +203,10 @@ export const HomeScreen = ({ navigation }) => {
         <View style={styles.sectionHeaderRow}>
           <View>
             <Text style={[styles.sectionTitle, { color: colors.text }]}>
-              Featured Activities
+              Laboratory Activities (Placeholder Slots)
             </Text>
             <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
-              Highlighted milestones
+              Empty compilation slots ready for future submissions
             </Text>
           </View>
           <TouchableOpacity
