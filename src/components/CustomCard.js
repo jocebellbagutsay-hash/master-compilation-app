@@ -23,11 +23,7 @@ export const CustomCard = ({
       shadowColor: colors.shadow,
     },
     elevated &&
-      (Platform.OS === 'ios'
-        ? styles.iosShadow
-        : Platform.OS === 'android'
-        ? styles.androidShadow
-        : styles.webShadow),
+      (Platform.OS === 'android' ? styles.androidShadow : styles.iosShadow),
     isDark && styles.darkShadowOverride,
     style,
   ];

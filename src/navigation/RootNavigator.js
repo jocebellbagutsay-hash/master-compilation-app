@@ -106,9 +106,12 @@ const TabNavigator = () => {
 export const RootNavigator = () => {
   const { isDark, colors } = useApp();
 
+  const baseTheme = isDark ? DarkTheme : DefaultTheme;
   const navigationTheme = {
+    ...baseTheme,
     dark: isDark,
     colors: {
+      ...baseTheme.colors,
       primary: colors.primary,
       background: colors.background,
       card: colors.card,
